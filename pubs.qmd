@@ -1,0 +1,12 @@
+---
+title: "Publications"
+listing:
+  contents: publications
+  sort: "date desc"
+  type: default
+  sort-ui: false
+  filter-ui: false
+  fields: [image, title, description ]
+page-layout: full
+title-block-banner: false
+---

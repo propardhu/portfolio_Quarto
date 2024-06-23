@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.47">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2022-07-10">
+
+<title>Spring Boot Authentication and Authorization – G. Pardhu</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">G. Pardhu</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pubs.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/guttikonda-pardhu/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/propardhu"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://medium.com/@guttikondaparthasai"> <i class="bi bi-medium" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Spring Boot Authentication and Authorization</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">spring-boot</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 10, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="https://guttikondaparthasai.medium.com/spring-boot-authentication-and-authorization-8182e9c1f735?source=rss-2c47946b91eb------2">click here to read this in medium</a></p>
+<p>
+Spring security, JWT, Authorisations
+</p>
+<figure class="figure">
+<img alt="" src="https://cdn-images-1.medium.com/max/1024/0*B2N27hdw1u8-4Gv0" class="figure-img">
+<figcaption>
+Photo by <a href="https://unsplash.com/@bergerteam?utm_source=medium&amp;utm_medium=referral">Florian Berger</a> on&nbsp;<a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a>
+</figcaption>
+</figure>
+<h4 class="anchored">
+🥷 What we&nbsp;do
+</h4>
+<p>
+In this article, We will be creating a Spring boot application to demonstrate Authentication and Authorization to users. For this Demo, we will be using MongoDB database. Also For this Authentication we will be using JWT Standard, and we will be using HS512 algorithm to encode the information.
+</p>
+<h4 class="anchored">
+🎯Dependencies used&nbsp;:
+</h4>
+<p>
+please view at <a href="https://github.com/propardhu/AuthDemoSpringBoot/blob/main/build.gradle">link</a>&nbsp;. (<a href="https://github.com/propardhu/AuthDemoSpringBoot/blob/main/build.gradle">https://github.com/propardhu/AuthDemoSpringBoot/blob/main/build.gradle</a>)
+</p>
+<h4 class="anchored">
+🧞‍♂️Steps To be&nbsp;followed
+</h4>
+<ul>
+<li>
+Create domain and repository for Both users and Authorities.
+</li>
+<li>
+Prepare JWT and Security Utilities.
+</li>
+<li>
+Configure spring security and JWT&nbsp;Filters.
+</li>
+<li>
+mongock ChangeLog to add initial users to DataBase.
+</li>
+</ul>
+<figure class="figure">
+<img alt="" src="https://cdn-images-1.medium.com/max/1024/0*VB5_uRnrQ_sYmhK4" class="figure-img">
+<figcaption>
+Photo by <a href="https://unsplash.com/@ispywithmylittleeye?utm_source=medium&amp;utm_medium=referral">Zeynep Sümer</a> on&nbsp;<a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a>
+</figcaption>
+</figure>
+<h4 class="anchored">
+Document Structures of Both User and Authorities
+</h4>
+<p>
+Authority.java
+</p>
+<pre><em>/**<br> * An authority (a security role) used by Spring Security.<br> */<br></em>@Document(collection = "authority")<br>public class Authority implements Serializable {<br><br>    private static final long <em>serialVersionUID </em>= 1L;<br><br>    @NotNull<br>    @Size(max = 50)<br>    @Id<br>    private String name;<br><br>    public String getName() {<br>        return name;<br>    }<br><br>    public void setName(String name) {<br>        this.name = name;<br>    }<br><br>    @Override<br>    public boolean equals(Object o) {<br>        if (this == o) {<br>            return true;<br>        }<br>        if (!(o instanceof Authority)) {<br>            return false;<br>        }<br>        return Objects.<em>equals</em>(name, ((Authority) o).name);<br>    }<br><br>    @Override<br>    public int hashCode() {<br>        return Objects.<em>hashCode</em>(name);<br>    }<br><br>    <em>// prettier-ignore<br>    </em>@Override<br>    public String toString() {<br>        return "Authority{" +<br>            "name='" + name + '\'' +<br>            "}";<br>    }<br>}</pre>
+<p>
+User.java
+</p>
+<pre><em>/**<br> * A user.<br> */<br></em>@org.springframework.data.mongodb.core.mapping.Document(collection = "user")<br>public class User extends AbstractAuditingEntity implements Serializable {<br><br>    private static final long <em>serialVersionUID </em>= 1L;<br><br>    @Id<br>    private String id;<br><br>    @NotNull<br>    @Pattern(regexp = Constants.<em>LOGIN_REGEX</em>)<br>    @Size(min = 1, max = 50)<br>    @Indexed<br>    private String login;<br><br>    @JsonIgnore<br>    @NotNull<br>    @Size(min = 60, max = 60)<br>    private String password;<br><br>    @Size(max = 50)<br>    @Field("first_name")<br>    private String firstName;<br><br>    @Size(max = 50)<br>    @Field("last_name")<br>    private String lastName;<br><br>    @Email<br>    @Size(min = 5, max = 254)<br>    @Indexed<br>    private String email;<br><br>    private boolean activated = false;<br><br>    @Size(min = 2, max = 10)<br>    @Field("lang_key")<br>    private String langKey;<br><br>    @Size(max = 256)<br>    @Field("image_url")<br>    private String imageUrl;<br><br>    @Size(max = 20)<br>    @Field("activation_key")<br>    @JsonIgnore<br>    private String activationKey;<br><br>    @Size(max = 20)<br>    @Field("reset_key")<br>    @JsonIgnore<br>    private String resetKey;<br><br>    @Field("reset_date")<br>    private Instant resetDate = null;<br><br>    @JsonIgnore<br>    private Set&lt;Authority&gt; authorities = new HashSet&lt;&gt;();<br>}</pre>
+<p>
+UserRepository.java
+</p>
+<pre>@Repository<br>public interface UserRepository extends MongoRepository&lt;User, String&gt; {<br>    Optional&lt;User&gt; findOneByActivationKey(String activationKey);<br><br>    List&lt;User&gt; findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant dateTime);<br><br>    Optional&lt;User&gt; findOneByResetKey(String resetKey);<br><br>    Optional&lt;User&gt; findOneByEmailIgnoreCase(String email);<br><br>    Optional&lt;User&gt; findOneByLogin(String login);<br><br>    Page&lt;User&gt; findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);<br>}</pre>
+<p>
+AuthorityRepository.java
+</p>
+<pre><em>/**<br> * Spring Data MongoDB repository for the {@link Authority} entity.<br> */<br></em>public interface AuthorityRepository extends MongoRepository&lt;Authority, String&gt; {}</pre>
+<p>
+AuthoritiesConstants.java
+</p>
+<pre>public final class AuthoritiesConstants {<br><br>    public static final String <em>ADMIN </em>= "ROLE_ADMIN";<br><br>    public static final String <em>USER </em>= "ROLE_USER";<br><br>    public static final String <em>ANONYMOUS </em>= "ROLE_ANONYMOUS";<br><br>    private AuthoritiesConstants() {}<br>}</pre>
+<h3 class="anchored">
+JWT Things
+</h3>
+<h3 class="anchored">
+👉 JWT working&nbsp;Flow:-
+</h3>
+<ul>
+<li>
+<strong>JSON Web Token(JWT)</strong> is an open standard used to share security information between two parties like client and server. It follows one particular cryptographic algorithm to encrypt and decrypt the JSON Objects. Algorithms like Hash 512,Hash 256, RS256&nbsp;etc.
+</li>
+<li>
+When a user registers in an application, user details are sent to the server. While saving the user details. We will ensure to <strong>encrypt the password</strong> while saving into the database.(<strong>BCryptPasswordEncoder</strong>)
+</li>
+<li>
+When a user logs in to the application, details like username and password will be sent to the server. There we will be <strong>verifying the password with encrypted password</strong>. If matches, we will be creating an <strong>JWT token</strong> and sent it as a response.
+</li>
+<li>
+After getting the <strong>JWT token, we need to append the token in the header</strong> of HTTP request (For all secured endpoints, we need to follow the&nbsp;same).
+</li>
+<li>
+The JWT token contains three parts <strong>(HEADER, PAYLOAD)are Base64-URL encoded JSON and Cryptographic Signature.<br>Note</strong>:- We need a secret key to encrypt and decrypt&nbsp;data.
+</li>
+<li>
+For Authorization, we will be adding the roles of the user to the token&nbsp;itself.
+</li>
+</ul>
+<figure class="figure">
+<img alt="" src="https://cdn-images-1.medium.com/max/1024/0*uPHcBHX7FSEoe-Jp" class="figure-img">
+<figcaption>
+Photo by <a href="https://unsplash.com/@calina?utm_source=medium&amp;utm_medium=referral">Georg Bommeli</a> on&nbsp;<a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a>
+</figcaption>
+</figure>
+<p>
+TokenProvider.java<br>Here we will be writing the methods to createTokens, getAuthentications from token and validate token.<br>Replace “KEY” with secretKey.
+</p>
+<pre>@Component<br>public class TokenProvider {<br><br>    private final Logger log = LoggerFactory.<em>getLogger</em>(TokenProvider.class);<br><br>    private static final String <em>AUTHORITIES_KEY </em>= "auth";<br><br>    private final Key key;<br><br>    private final JwtParser jwtParser;<br><br>    private final long tokenValidityInMilliseconds;<br><br>    private final long tokenValidityInMillisecondsForRememberMe;<br><br>    public TokenProvider() {<br>        byte[] keyBytes;<br>        String secret = "KEY";<br>        if (!ObjectUtils.<em>isEmpty</em>(secret)) {<br>            log.debug("Using a Base64-encoded JWT secret key");<br>            keyBytes = Decoders.<em>BASE64</em>.decode(secret);<br>        } else {<br>            log.warn(<br>                "Warning: the JWT key used is not Base64-encoded. " +<br>                "We recommend using the `jhipster.security.authentication.jwt.base64-secret` key for optimum security."<br>            );<br>            secret = "YWQzMmJiZjgwMDliY2M4NWE0ZjVkOWUxZmRjYTcwMDc2OTZkN2Y5MzQ3ODQ4N2M2YmExNTVmNDFjMDdhZGUzZDRmZDE2OGFkMTc1NmE4MWVmYTIxZDI3YWIzZTNhNzQ1YjNhMzE1ZGVmMWRhNWQxZGFhN2I3NjQzMWRkNjczODY=";<br>            keyBytes = secret.getBytes(StandardCharsets.<em>UTF_8</em>);<br>        }<br>        key = Keys.<em>hmacShaKeyFor</em>(keyBytes);<br>        jwtParser = Jwts.<em>parserBuilder</em>().setSigningKey(key).build();<br>        this.tokenValidityInMilliseconds = 1000 * 700;<br>        this.tokenValidityInMillisecondsForRememberMe = 1000 * 700;<br>    }<br><br>    public String createToken(Authentication authentication, boolean rememberMe) {<br>        String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.<em>joining</em>(","));<br><br>        long now = (new Date()).getTime();<br>        Date validity;<br>        if (rememberMe) {<br>            validity = new Date(now + this.tokenValidityInMillisecondsForRememberMe);<br>        } else {<br>            validity = new Date(now + this.tokenValidityInMilliseconds);<br>        }<br><br>        return Jwts<br>            .<em>builder</em>()<br>            .setSubject(authentication.getName())<br>            .claim(<em>AUTHORITIES_KEY</em>, authorities)<br>            .signWith(key, SignatureAlgorithm.<em>HS512</em>)<br>            .setExpiration(validity)<br>            .compact();<br>    }<br><br>    public Authentication getAuthentication(String token) {<br>        Claims claims = jwtParser.parseClaimsJws(token).getBody();<br><br>        Collection&lt;? extends GrantedAuthority&gt; authorities = Arrays<br>            .<em>stream</em>(claims.get(<em>AUTHORITIES_KEY</em>).toString().split(","))<br>            .filter(auth -&gt; !auth.trim().isEmpty())<br>            .map(SimpleGrantedAuthority::new)<br>            .collect(Collectors.<em>toList</em>());<br><br>        User principal = new User(claims.getSubject(), "", authorities);<br><br>        return new UsernamePasswordAuthenticationToken(principal, token, authorities);<br>    }<br><br>    public boolean validateToken(String authToken) {<br>        try {<br>            jwtParser.parseClaimsJws(authToken);<br>            return true;<br>        } catch (JwtException | IllegalArgumentException e) {<br>            log.info("Invalid JWT token.");<br>            log.trace("Invalid JWT token trace.", e);<br>        }<br>        return false;<br>    }<br>}</pre>
+<p>
+JWTConfigurer.java<br>Now We need to add JWTFilter with tokenProvider to the HttpSecurity, That can be overwritten by extending SecurityConfigurerAdapter&lt;DefaultSecurityFilterChain, HttpSecurity&gt;.
+</p>
+<pre>public class JWTConfigurer extends SecurityConfigurerAdapter&lt;DefaultSecurityFilterChain, HttpSecurity&gt; {<br><br>    private final TokenProvider tokenProvider;<br><br>    public JWTConfigurer(TokenProvider tokenProvider) {<br>        this.tokenProvider = tokenProvider;<br>    }<br><br>    @Override<br>    public void configure(HttpSecurity http) {<br>        JWTFilter customFilter = new JWTFilter(tokenProvider);<br>        http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);<br>    }<br>}</pre>
+<p>
+JWTFilter.java<br>This class will be extending the GenericFilterBean class and we can add Filter by overriding doFilter method. So here we will be validating all the request with bearer token. if the request do not have it can access only public&nbsp;API’s.
+</p>
+<pre>public class JWTFilter extends GenericFilterBean {<br><br>    public static final String <em>AUTHORIZATION_HEADER </em>= "Authorization";<br><br>    private final TokenProvider tokenProvider;<br><br>    public JWTFilter(TokenProvider tokenProvider) {<br>        this.tokenProvider = tokenProvider;<br>    }<br><br>    @Override<br>    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)<br>        throws IOException, ServletException {<br>        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;<br>        String jwt = resolveToken(httpServletRequest);<br>        if (StringUtils.<em>hasText</em>(jwt) &amp;&amp; this.tokenProvider.validateToken(jwt)) {<br>            Authentication authentication = this.tokenProvider.getAuthentication(jwt);<br>            SecurityContextHolder.<em>getContext</em>().setAuthentication(authentication);<br>        }<br>        filterChain.doFilter(servletRequest, servletResponse);<br>    }<br><br>    private String resolveToken(HttpServletRequest request) {<br>        String bearerToken = request.getHeader(<em>AUTHORIZATION_HEADER</em>);<br>        if (StringUtils.<em>hasText</em>(bearerToken) &amp;&amp; bearerToken.startsWith("Bearer ")) {<br>            return bearerToken.substring(7);<br>        }<br>        return null;<br>    }<br>}</pre>
+<p>
+Service which provides user details from DataBase need to be declared as component to avoid dependency cycle in our&nbsp;project.
+</p>
+<pre><em>/**<br> * Authenticate a user from the database.<br> */<br></em>@Component("userDetailsService")<br>public class DomainUserDetailsService implements UserDetailsService {<br><br>    private final Logger log = LoggerFactory.<em>getLogger</em>(DomainUserDetailsService.class);<br><br>    private final UserRepository userRepository;<br><br>    public DomainUserDetailsService(UserRepository userRepository) {<br>        this.userRepository = userRepository;<br>    }<br><br>    @Override<br>    public UserDetails loadUserByUsername(final String login) {<br>        log.debug("Authenticating {}", login);<br><br>        if (new EmailValidator().isValid(login, null)) {<br>            return userRepository<br>                .findOneByEmailIgnoreCase(login)<br>                .map(user -&gt; createSpringSecurityUser(login, user))<br>                .orElseThrow(() -&gt; new UsernameNotFoundException("User with email " + login + " was not found in the database"));<br>        }<br><br>        String lowercaseLogin = login.toLowerCase(Locale.<em>ENGLISH</em>);<br>        return userRepository<br>            .findOneByLogin(lowercaseLogin)<br>            .map(user -&gt; createSpringSecurityUser(lowercaseLogin, user))<br>            .orElseThrow(() -&gt; new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database"));<br>    }<br><br>    private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {<br>        if (!user.isActivated()) {<br>            throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");<br>        }<br>        List&lt;GrantedAuthority&gt; grantedAuthorities = user<br>            .getAuthorities()<br>            .stream()<br>            .map(authority -&gt; new SimpleGrantedAuthority(authority.getName()))<br>            .collect(Collectors.<em>toList</em>());<br>        return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), grantedAuthorities);<br>    }<br>}</pre>
+<p>
+SecurityUtils.java<br>Here we will be writing methods related to current user login like getCurrentUserName etc.
+</p>
+<pre><em>/**<br> * Utility class for Spring Security.<br> */<br></em>public final class SecurityUtils {<br><br>    private SecurityUtils() {}<br><br>    <em>/**<br>     * Get the login of the current user.<br>     *<br>     * @return the login of the current user.<br>     */<br>    </em>public static Optional&lt;String&gt; getCurrentUserLogin() {<br>        SecurityContext securityContext = SecurityContextHolder.<em>getContext</em>();<br>        return Optional.<em>ofNullable</em>(<em>extractPrincipal</em>(securityContext.getAuthentication()));<br>    }<br><br>    private static String extractPrincipal(Authentication authentication) {<br>        if (authentication == null) {<br>            return null;<br>        } else if (authentication.getPrincipal() instanceof UserDetails) {<br>            UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();<br>            return springSecurityUser.getUsername();<br>        } else if (authentication.getPrincipal() instanceof String) {<br>            return (String) authentication.getPrincipal();<br>        }<br>        return null;<br>    }<br><br>    <em>/**<br>     * Get the JWT of the current user.<br>     *<br>     * @return the JWT of the current user.<br>     */<br>    </em>public static Optional&lt;String&gt; getCurrentUserJWT() {<br>        SecurityContext securityContext = SecurityContextHolder.<em>getContext</em>();<br>        return Optional<br>            .<em>ofNullable</em>(securityContext.getAuthentication())<br>            .filter(authentication -&gt; authentication.getCredentials() instanceof String)<br>            .map(authentication -&gt; (String) authentication.getCredentials());<br>    }<br><br>    <em>/**<br>     * Check if a user is authenticated.<br>     *<br>     * @return true if the user is authenticated, false otherwise.<br>     */<br>    </em>public static boolean isAuthenticated() {<br>        Authentication authentication = SecurityContextHolder.<em>getContext</em>().getAuthentication();<br>        return authentication != null &amp;&amp; <em>getAuthorities</em>(authentication).noneMatch(AuthoritiesConstants.<em>ANONYMOUS</em>::equals);<br>    }<br><br>    <em>/**<br>     * Checks if the current user has any of the authorities.<br>     *<br>     * @param authorities the authorities to check.<br>     * @return true if the current user has any of the authorities, false otherwise.<br>     */<br>    </em>public static boolean hasCurrentUserAnyOfAuthorities(String... authorities) {<br>        Authentication authentication = SecurityContextHolder.<em>getContext</em>().getAuthentication();<br>        return (<br>            authentication != null &amp;&amp; <em>getAuthorities</em>(authentication).anyMatch(authority -&gt; Arrays.<em>asList</em>(authorities).contains(authority))<br>        );<br>    }<br><br>    <em>/**<br>     * Checks if the current user has none of the authorities.<br>     *<br>     * @param authorities the authorities to check.<br>     * @return true if the current user has none of the authorities, false otherwise.<br>     */<br>    </em>public static boolean hasCurrentUserNoneOfAuthorities(String... authorities) {<br>        return !<em>hasCurrentUserAnyOfAuthorities</em>(authorities);<br>    }<br><br>    <em>/**<br>     * Checks if the current user has a specific authority.<br>     *<br>     * @param authority the authority to check.<br>     * @return true if the current user has the authority, false otherwise.<br>     */<br>    </em>public static boolean hasCurrentUserThisAuthority(String authority) {<br>        return <em>hasCurrentUserAnyOfAuthorities</em>(authority);<br>    }<br><br>    private static Stream&lt;String&gt; getAuthorities(Authentication authentication) {<br>        return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority);<br>    }<br>}</pre>
+<figure class="figure">
+<img alt="" src="https://cdn-images-1.medium.com/max/1024/0*sA1fdRXDyh0m3piZ" class="figure-img">
+<figcaption>
+Photo by <a href="https://unsplash.com/@fantasyflip?utm_source=medium&amp;utm_medium=referral">Philipp Katzenberger</a> on&nbsp;<a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a>
+</figcaption>
+</figure>
+<h4 class="anchored">
+Security Configurations
+</h4>
+<p>
+SecurityConfiguration.java<br>Here we will be saying what kind of api’s need to be permitted as public&nbsp;api’s.
+</p>
+<pre>@EnableWebSecurity<br>@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)<br>@Import(SecurityProblemSupport.class)<br>public class SecurityConfiguration extends WebSecurityConfigurerAdapter {<br><br>    private final TokenProvider tokenProvider;<br><br>    private final CorsFilter corsFilter;<br>    private final SecurityProblemSupport problemSupport;<br><br>    public SecurityConfiguration(<br>        TokenProvider tokenProvider,<br>        CorsFilter corsFilter,<br>        SecurityProblemSupport problemSupport<br>    ) {<br>        this.tokenProvider = tokenProvider;<br>        this.corsFilter = corsFilter;<br>        this.problemSupport = problemSupport;<br>    }<br><br>    @Bean<br>    public PasswordEncoder passwordEncoder() {<br>        return new BCryptPasswordEncoder();<br>    }<br><br>    @Override<br>    public void configure(WebSecurity web) {<br>        web.ignoring().antMatchers(HttpMethod.<em>OPTIONS</em>, "/**").antMatchers("/swagger-ui/**").antMatchers("/test/**");<br>    }<br><br>    @Override<br>    public void configure(HttpSecurity http) throws Exception {<br>        <em>// @formatter:off<br>        </em>http<br>            .csrf()<br>            .disable()<br>            .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)<br>            .exceptionHandling()<br>                .authenticationEntryPoint(problemSupport)<br>                .accessDeniedHandler(problemSupport)<br>        .and()<br>            .headers()<br>            .contentSecurityPolicy("default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:")<br>        .and()<br>            .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.<em>STRICT_ORIGIN_WHEN_CROSS_ORIGIN</em>)<br>        .and()<br>            .permissionsPolicy().policy("camera=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), sync-xhr=()")<br>        .and()<br>            .frameOptions()<br>            .deny()<br>        .and()<br>            .sessionManagement()<br>            .sessionCreationPolicy(SessionCreationPolicy.<em>STATELESS</em>)<br>        .and()<br>            .authorizeRequests()<br>            .antMatchers("/api/authenticate").permitAll()<br>            .antMatchers("/api/register").permitAll()<br>            .antMatchers("/api/activate").permitAll()<br>            .antMatchers("/api/account/reset-password/init").permitAll()<br>            .antMatchers("/api/account/reset-password/finish").permitAll()<br>            .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.<em>ADMIN</em>)<br>            .antMatchers("/api/**").authenticated()<br>            .antMatchers("/management/health").permitAll()<br>            .antMatchers("/management/health/**").permitAll()<br>            .antMatchers("/management/info").permitAll()<br>            .antMatchers("/management/prometheus").permitAll()<br>            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.<em>ADMIN</em>)<br>        .and()<br>            .httpBasic()<br>        .and()<br>            .apply(securityConfigurerAdapter());<br>        <em>// @formatter:on<br>    </em>}<br><br>    private JWTConfigurer securityConfigurerAdapter() {<br>        return new JWTConfigurer(tokenProvider);<br>    }<br>}</pre>
+<p>
+WebConfigure.java<br>Allowed domains needs be to added here to avoid COR’s related&nbsp;issues
+</p>
+<pre><em>/**<br> * Configuration of web application with Servlet 3.0 APIs.<br> */<br></em>@Configuration<br>public class WebConfigurer implements ServletContextInitializer {<br><br>    private final Logger log = LoggerFactory.<em>getLogger</em>(WebConfigurer.class);<br><br>    private final Environment env;<br><br>    public WebConfigurer(Environment env) {<br>        this.env = env;<br>    }<br><br>    @Override<br>    public void onStartup(ServletContext servletContext) throws ServletException {<br>        if (env.getActiveProfiles().length != 0) {<br>            log.info("Web application configuration, using profiles: {}", (Object[]) env.getActiveProfiles());<br>        }<br><br>        log.info("Web application fully configured");<br>    }<br><br>    @Bean<br>    public CorsFilter corsFilter() {<br>        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();<br>        CorsConfiguration config = new CorsConfiguration();<br>        List&lt;String&gt; list = new ArrayList&lt;&gt;();<br>        list.add("*");<br>        config.setAllowedOriginPatterns(list);<br>        if (!CollectionUtils.<em>isEmpty</em>(config.getAllowedOrigins()) || !CollectionUtils.<em>isEmpty</em>(config.getAllowedOriginPatterns())) {<br>            log.debug("Registering CORS filter");<br>            source.registerCorsConfiguration("/api/**", config);<br>            source.registerCorsConfiguration("/management/**", config);<br>            source.registerCorsConfiguration("/v2/api-docs", config);<br>            source.registerCorsConfiguration("/v3/api-docs", config);<br>            source.registerCorsConfiguration("/swagger-resources", config);<br>            source.registerCorsConfiguration("/swagger-ui/**", config);<br>        }<br>        return new CorsFilter(source);<br>    }<br>}</pre>
+<figure class="figure">
+<img alt="" src="https://cdn-images-1.medium.com/max/1024/0*dvInUHmgY9aXjguP" class="figure-img">
+<figcaption>
+Photo by <a href="https://unsplash.com/@benjaminlehman?utm_source=medium&amp;utm_medium=referral">benjamin lehman</a> on&nbsp;<a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a>
+</figcaption>
+</figure>
+<h4 class="anchored">
+Mongock ChangeLog
+</h4>
+<p>
+We will be using mongock to add default user details to database like&nbsp;admin.
+</p>
+<p>
+In application.properties we need to give the path of the class which contains ChangeLog annotation.
+</p>
+<pre>spring.data.mongodb.uri=mongodb://localhost:27017/AuthDemo<br>mongock.change-logs-scan-package=<br>com.pardhu.authdemo.config.InitialSetupMigration</pre>
+<p>
+InitialSetupMigration.java
+</p>
+<pre><em>/**<br> * Creates the initial database setup.<br> */<br></em>@ChangeLog(order = "001")<br>public class InitialSetupMigration {<br><br>    @ChangeSet(order = "01", author = "initiator", id = "01-addAuthorities")<br>    public void addAuthorities(MongockTemplate mongoTemplate) {<br>        Authority adminAuthority = new Authority();<br>        adminAuthority.setName(AuthoritiesConstants.<em>ADMIN</em>);<br>        Authority userAuthority = new Authority();<br>        userAuthority.setName(AuthoritiesConstants.<em>USER</em>);<br>        mongoTemplate.save(adminAuthority);<br>        mongoTemplate.save(userAuthority);<br>    }<br><br>    @ChangeSet(order = "02", author = "initiator", id = "02-addUsers")<br>    public void addUsers(MongockTemplate mongoTemplate) {<br>        Authority adminAuthority = new Authority();<br>        adminAuthority.setName(AuthoritiesConstants.<em>ADMIN</em>);<br>        Authority userAuthority = new Authority();<br>        userAuthority.setName(AuthoritiesConstants.<em>USER</em>);<br><br>        User adminUser = new User();<br>        adminUser.setId("user-1");<br>        adminUser.setLogin("admin");<br>        adminUser.setPassword("$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC");<br>        adminUser.setFirstName("admin");<br>        adminUser.setLastName("Administrator");<br>        adminUser.setEmail("admin@localhost");<br>        adminUser.setActivated(true);<br>        adminUser.setLangKey("en");<br>        adminUser.setCreatedBy(Constants.<em>SYSTEM</em>);<br>        adminUser.setCreatedDate(Instant.<em>now</em>());<br>        adminUser.getAuthorities().add(adminAuthority);<br>        adminUser.getAuthorities().add(userAuthority);<br>        mongoTemplate.save(adminUser);<br><br>        User userUser = new User();<br>        userUser.setId("user-2");<br>        userUser.setLogin("user");<br>        userUser.setPassword("$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K");<br>        userUser.setFirstName("");<br>        userUser.setLastName("User");<br>        userUser.setEmail("user@localhost");<br>        userUser.setActivated(true);<br>        userUser.setLangKey("en");<br>        userUser.setCreatedBy(Constants.<em>SYSTEM</em>);<br>        userUser.setCreatedDate(Instant.<em>now</em>());<br>        userUser.getAuthorities().add(userAuthority);<br>        mongoTemplate.save(userUser);<br>    }<br>}</pre>
+<p>
+Now we have two Authorities. Admin and User.<br>While writing an api in controller itself we can annotate like this api can be accessed by admin only using annotations →<br><span class="citation" data-cites="PreAuthorize">@PreAuthorize</span>(“hasAuthority(”” + AuthoritiesConstants.<em>ADMIN </em>+ “”)”)<br><span class="citation" data-cites="PostAuthorize">@PostAuthorize</span>(“hasAuthority(”” + AuthoritiesConstants.<em>ADMIN </em>+&nbsp;“”)”)
+</p>
+<h4 class="anchored">
+Complete working git repo is available at <a href="https://github.com/propardhu/AuthDemoSpringBoot"><strong>GitHub</strong></a><strong>&nbsp;. Also we wrote few login and register&nbsp;API’s.</strong>
+</h4>
+<p>
+Thank you….
+</p>
+<p>
+<a href="https://guttikondaparthasai.medium.com/">Pardhu Guttikonda - Medium</a>
+</p>
+<p><img alt="" height="1" src="https://medium.com/_/stat?event=post.clientViewed&amp;referrerSource=full_rss&amp;postId=8182e9c1f735" width="1"></p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Developed with Quarto by Partha Sai Guttikonda — 2024</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

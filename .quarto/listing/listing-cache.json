@@ -1,0 +1,10 @@
+{
+  "listingMap": {
+    "pubs.qmd": [
+      "publications"
+    ],
+    "blog.qmd": [
+      "blog_posts"
+    ]
+  }
+}

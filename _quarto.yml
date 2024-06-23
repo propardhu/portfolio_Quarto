@@ -1,0 +1,36 @@
+project:
+  type: website
+
+website:
+  title: "G. Pardhu"
+  
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: blog.qmd
+        text: Blog
+      - href: pubs.qmd
+        text: Publications
+
+    right: 
+      - icon: linkedin
+        href: https://www.linkedin.com/in/guttikonda-pardhu/
+      - icon: github
+        href: https://github.com/propardhu
+      - icon: medium
+        href: https://medium.com/@guttikondaparthasai
+      # - icon: file-earmark-text
+      #   text: CV
+        # href: cv/index.qmd
+  page-footer: "Developed with Quarto by Partha Sai Guttikonda — 2024" 
+  reader-mode: false
+format:
+  html:
+    theme: 
+      light: [simplex, styles.scss]
+      dark: [superhero, styles.scss]
+    toc: true
+    toc-location: left
+execute:
+  freeze: auto

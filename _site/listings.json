@@ -1,0 +1,24 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/blog_posts/2024-05-22-building-an-advanced-image-search-system-with-machine-learning-and-elasticsearch.html",
+      "/blog_posts/2024-05-09-grad-cam-visualisation-of-resnet-50-s-decision-pathways.html",
+      "/blog_posts/2024-02-18-simplifying-kafka-effortless-stream-processing-with-docker.html",
+      "/blog_posts/2023-11-19-free-easy-portfolio-launch-customize-and-host-with-github-and-netlify.html",
+      "/blog_posts/2023-10-13-network-checklist-for-unity-vr-apps.html",
+      "/blog_posts/2023-07-06-image-processing-using-cnn.html",
+      "/blog_posts/2023-03-05-binary-tree-data-structure.html",
+      "/blog_posts/2022-11-27-spring-data-jpa.html",
+      "/blog_posts/2022-10-07-cucumber-with-selenium-automation.html",
+      "/blog_posts/2022-07-10-spring-boot-authentication-and-authorization.html"
+    ]
+  },
+  {
+    "listing": "/pubs.html",
+    "items": [
+      "/publications/visvr.html",
+      "/publications/AdversarialAttack.html"
+    ]
+  }
+]
