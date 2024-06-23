@@ -3,6 +3,7 @@ project:
 
 website:
   title: "G. Pardhu"
+  google-analytics: "G-EGR7E28T14"
   
   navbar:
     left:
