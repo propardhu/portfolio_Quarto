@@ -1,47 +1,47 @@
 {
-  "index.qmd": {
-    "index.html": "12baa504"
-  },
   "blog_posts/2023-11-19-free-easy-portfolio-launch-customize-and-host-with-github-and-netlify.md": {
-    "2023-11-19-free-easy-portfolio-launch-customize-and-host-with-github-and-netlify.html": "cd2c85f3"
+    "2023-11-19-free-easy-portfolio-launch-customize-and-host-with-github-and-netlify.html": "f844e785"
   },
   "blog_posts/2023-10-13-network-checklist-for-unity-vr-apps.md": {
-    "2023-10-13-network-checklist-for-unity-vr-apps.html": "a399d3ca"
+    "2023-10-13-network-checklist-for-unity-vr-apps.html": "afa33139"
   },
   "blog_posts/2023-07-06-image-processing-using-cnn.md": {
-    "2023-07-06-image-processing-using-cnn.html": "ad4932da"
+    "2023-07-06-image-processing-using-cnn.html": "19fb2539"
   },
   "blog_posts/2024-02-18-simplifying-kafka-effortless-stream-processing-with-docker.md": {
-    "2024-02-18-simplifying-kafka-effortless-stream-processing-with-docker.html": "97a670ab"
+    "2024-02-18-simplifying-kafka-effortless-stream-processing-with-docker.html": "82cdc565"
   },
   "blog_posts/2022-07-10-spring-boot-authentication-and-authorization.md": {
-    "2022-07-10-spring-boot-authentication-and-authorization.html": "b5057bc0"
+    "2022-07-10-spring-boot-authentication-and-authorization.html": "01af2204"
   },
   "blog_posts/2024-05-22-building-an-advanced-image-search-system-with-machine-learning-and-elasticsearch.md": {
-    "2024-05-22-building-an-advanced-image-search-system-with-machine-learning-and-elasticsearch.html": "73b37cc1"
+    "2024-05-22-building-an-advanced-image-search-system-with-machine-learning-and-elasticsearch.html": "d1fccaa6"
   },
   "blog_posts/2023-03-05-binary-tree-data-structure.md": {
-    "2023-03-05-binary-tree-data-structure.html": "fa3b0615"
+    "2023-03-05-binary-tree-data-structure.html": "f5b7e9f6"
   },
   "blog_posts/2024-05-09-grad-cam-visualisation-of-resnet-50-s-decision-pathways.md": {
-    "2024-05-09-grad-cam-visualisation-of-resnet-50-s-decision-pathways.html": "da8fdbab"
+    "2024-05-09-grad-cam-visualisation-of-resnet-50-s-decision-pathways.html": "ff447c27"
   },
   "blog_posts/2022-10-07-cucumber-with-selenium-automation.md": {
-    "2022-10-07-cucumber-with-selenium-automation.html": "18a8b79b"
+    "2022-10-07-cucumber-with-selenium-automation.html": "2e40f9d9"
   },
   "blog_posts/2022-11-27-spring-data-jpa.md": {
-    "2022-11-27-spring-data-jpa.html": "76b8aa43"
+    "2022-11-27-spring-data-jpa.html": "c6986d22"
   },
   "publications/visvr.qmd": {
-    "visvr.html": "67d892de"
+    "visvr.html": "7d248bac"
   },
   "publications/AdversarialAttack.qmd": {
-    "AdversarialAttack.html": "a2cf48ff"
+    "AdversarialAttack.html": "94e3c1e8"
+  },
+  "index.qmd": {
+    "index.html": "0aad6198"
   },
   "pubs.qmd": {
-    "pubs.html": "b141953a"
+    "pubs.html": "37624c88"
   },
   "blog.qmd": {
-    "blog.html": "e6bbf82f"
+    "blog.html": "7a27d1a3"
   }
 }

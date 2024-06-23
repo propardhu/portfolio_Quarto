@@ -4,6 +4,11 @@ project:
 website:
   title: "G. Pardhu"
   google-analytics: "G-EGR7E28T14"
+  description: "Pardhu portfolio "
+  image: "./images/profile.jpg"
+  open-graph: true
+  favicon: ./images/profile.jpg
+
   
   navbar:
     left:
