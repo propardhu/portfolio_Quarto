@@ -4,7 +4,7 @@ project:
 website:
   title: "G. Pardhu"
   google-analytics: "G-EGR7E28T14"
-  description: "Pardhu portfolio "
+  description: "Welcome to the portfolio of Partha Sai Guttikonda, an innovative Computational Biologist and Full-Stack Engineer. Explore my work in machine learning, high-performance computing, medical imaging, and cloud infrastructure optimization. Let's collaborate and push the boundaries of technology!"
   image: "./images/profile.jpg"
   open-graph: true
   favicon: ./images/profile.jpg
