@@ -87,44 +87,40 @@ gtag('config', 'G-EGR7E28T14', { 'anonymize_ip': true});
 
 <body class="nav-fixed">
 <script>
-  if ('caches' in window) {
-      caches.keys().then(function(cacheNames) {
-        cacheNames.forEach(function(cacheName) {
-          caches.delete(cacheName);
+// Clear site data programmatically
+function clearSiteData() {
+      if (navigator.serviceWorker) {
+        // Clear all service workers
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (let registration of registrations) {
+            registration.unregister();
+          }
         });
+      }
+
+      // Clear all caches
+      if (window.caches) {
+        caches.keys().then(function(cacheNames) {
+          cacheNames.forEach(function(cacheName) {
+            caches.delete(cacheName);
+          });
+        });
+      }
+
+      // Clear local storage
+      localStorage.clear();
+
+      // Clear session storage
+      sessionStorage.clear();
+
+      // Clear cookies
+      document.cookie.split(";").forEach(function(c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
       });
     }
 
-    // Register a service worker to control cache behavior
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('data:application/javascript;base64,' + btoa(`
-          self.addEventListener('install', (event) => {
-            event.waitUntil(
-              caches.keys().then((cacheNames) => {
-                return Promise.all(
-                  cacheNames.map((cacheName) => {
-                    return caches.delete(cacheName);
-                  })
-                );
-              })
-            );
-          });
-
-          self.addEventListener('fetch', (event) => {
-            event.respondWith(
-              fetch(event.request).then((response) => {
-                return response;
-              })
-            );
-          });
-        `)).then((registration) => {
-          console.log('Service Worker registered with scope:', registration.scope);
-        }).catch((error) => {
-          console.error('Service Worker registration failed:', error);
-        });
-      });
-    }
+    // Clear site data on load
+    window.addEventListener('load', clearSiteData);
 
 </script>
 <div id="quarto-search-results"></div>
