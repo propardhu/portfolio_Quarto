@@ -34,12 +34,6 @@ Welcome to my portfolio! 🚀 I’m Partha Sai Guttikonda, a dedicated and innov
 🖥️ Computer Vision and Image Processing\
 📚 Continuous Learning and Research in AI
 
-
-## Experience
-**UTA Health Data Science Lab** \Computational Biologist | 1.5 Years\
-**Virtusa** \Full Stack Software Engineer Intern | 5 Months\
-**VantaShala.com** \Full Stack Engineering Intern | 1.5 Years\
-
 ## Education
 **University of Texas at Arlington** | USA \
 MSc in CSE | GPA: 3.99\
