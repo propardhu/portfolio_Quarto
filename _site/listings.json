@@ -17,6 +17,7 @@
   {
     "listing": "/pubs.html",
     "items": [
+      "/publications/PhysiologicalSignalCompression.html",
       "/publications/visvr.html",
       "/publications/AdversarialAttack.html"
     ]

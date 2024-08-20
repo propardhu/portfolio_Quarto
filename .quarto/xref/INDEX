@@ -43,5 +43,8 @@
   },
   "blog.qmd": {
     "blog.html": "7a27d1a3"
+  },
+  "publications/PhysiologicalSignalCompression.qmd": {
+    "PhysiologicalSignalCompression.html": "2d4aca33"
   }
 }
