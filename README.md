@@ -1,7 +1,3 @@
-Here's a README template for your portfolio hosted at [your GitHub repository](https://github.com/propardhu/portfolio_Quarto):
-
----
-
 # Portfolio Website
 
 This repository contains the source code for my personal portfolio website, built using Quarto. The website showcases my work, research papers, projects, and other relevant professional experiences.
