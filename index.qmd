@@ -18,7 +18,7 @@ about:
 
 ## About me
 
-Welcome to my portfolio! 🚀 I’m Partha Sai Guttikonda, a driven and innovative Full-Stack Engineer and Researcher with expertise in machine learning, high-performance computing, and software development. 🧠💻 With a Master’s degree in Computer Science from the University of Texas at Arlington and hands-on experience in building and optimizing scalable web applications, managing microservice architectures, and implementing advanced AI techniques, I’ve worked on projects that enhance diagnostic tools, improve infrastructure efficiency, and optimize data-driven workflows. 🌟 Explore my work to discover how I’ve contributed to the fields of medical imaging, cloud computing, and backend systems. 🏥☁️ I’m always looking for opportunities to collaborate and create impactful, cutting-edge solutions! 🌐✨
+Hello! 👋 I’m **Partha Sai Guttikonda**, a Full-Stack Engineer and Researcher with experience in **machine learning**, **high-performance computing**, and **software development**. 🎓 I hold a Master's degree in **Computer Science** from the University of Texas at Arlington. I’ve worked on **building scalable web applications**, **managing microservices**, and applying **AI** to solve complex problems. 🔧 My projects focus on improving **diagnostic tools**, optimizing **infrastructure**, and automating **workflows**. 🌟 Feel free to explore my work and see how I’ve contributed to **medical imaging**, **cloud computing**, and **backend systems**. I’m excited to collaborate and create impactful solutions! 🌐✨
 
 ## Areas of Interest
 
