@@ -18,24 +18,22 @@ about:
 
 ## About me
 
-Welcome to my portfolio! 🚀 I’m Partha Sai Guttikonda, a dedicated and innovative Computational Biologist and Full-Stack Engineer with a deep passion for leveraging machine learning and high-performance computing to solve complex problems. 🧠💻 With a Master's degree in Computer Science and Engineering from the University of Texas at Arlington and hands-on experience managing advanced GPU clusters and developing scalable web applications, I’ve successfully led projects that merge cutting-edge technology with practical applications. 🌟 Explore my work to see how I’ve contributed to advancements in medical imaging, cloud infrastructure optimization, and more. 🏥☁️ Let’s collaborate and push the boundaries of what’s possible! 🌐✨
+Welcome to my portfolio! 🚀 I’m Partha Sai Guttikonda, a driven and innovative Full-Stack Engineer and Researcher with expertise in machine learning, high-performance computing, and software development. 🧠💻 With a Master’s degree in Computer Science from the University of Texas at Arlington and hands-on experience in building and optimizing scalable web applications, managing microservice architectures, and implementing advanced AI techniques, I’ve worked on projects that enhance diagnostic tools, improve infrastructure efficiency, and optimize data-driven workflows. 🌟 Explore my work to discover how I’ve contributed to the fields of medical imaging, cloud computing, and backend systems. 🏥☁️ I’m always looking for opportunities to collaborate and create impactful, cutting-edge solutions! 🌐✨
 
 ## Areas of Interest
 
-🧠 Artificial Intelligence and Machine Learning\
-🔬 Medical Imaging and Bioinformatics\
-📊 Data Analysis and Visualization\
-🚀 High-Performance Computing and GPU Utilization\
-🌐 Cloud Computing and Infrastructure Optimization\
-🔧 Software Development and Full-Stack Engineering\
-📈 Predictive Modeling and Algorithm Development\
-🔄 Automation of Data Pipelines and Workflows\
-🌍 Environmental Impact and Sustainability\
-🖥️ Computer Vision and Image Processing\
+🧠 Artificial Intelligence and Machine Learning
+🔬 Medical Imaging and Bioinformatics
+📊 Data Analysis, Reporting, and Visualization
+🚀 High-Performance Computing (HPC) and GPU Utilization
+🌐 Cloud Computing and Infrastructure Optimization
+🔧 Full-Stack Software Development
+🔄 Automation of Data Pipelines and Workflows
+🖥️ Computer Vision and Image Processing
 📚 Continuous Learning and Research in AI
 
 ## Education
 **University of Texas at Arlington** | USA \
-MSc in CSE | GPA: 3.99\
+MSc in CSE | GPA: 3.9\
 **Sreenidhi Institute of Technology** | IND \
 BTech in CSE | GPA: 3.89
