@@ -22,15 +22,15 @@ Hello! 👋 I’m **Partha Sai Guttikonda**, a Full-Stack Engineer and Researche
 
 ## Areas of Interest
 
-🧠 Artificial Intelligence and Machine Learning
-🔬 Medical Imaging and Bioinformatics
-📊 Data Analysis, Reporting, and Visualization
-🚀 High-Performance Computing (HPC) and GPU Utilization
-🌐 Cloud Computing and Infrastructure Optimization
-🔧 Full-Stack Software Development
-🔄 Automation of Data Pipelines and Workflows
-🖥️ Computer Vision and Image Processing
-📚 Continuous Learning and Research in AI
+🧠 Artificial Intelligence and Machine Learning\
+🔬 Medical Imaging and Bioinformatics\
+📊 Data Analysis, Reporting, and Visualization\
+🚀 High-Performance Computing (HPC) and GPU Utilization\
+🌐 Cloud Computing and Infrastructure Optimization\
+🔧 Full-Stack Software Development\
+🔄 Automation of Data Pipelines and Workflows\
+🖥️ Computer Vision and Image Processing\
+📚 Continuous Learning and Research in AI\
 
 ## Education
 **University of Texas at Arlington** | USA \
