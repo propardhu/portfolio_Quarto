@@ -1,6 +1,6 @@
 ---
 title: "Partha Sai Guttikonda"
-image: ./images/profile.jpg
+image: ./images/profile.jpeg
 about:
   template: solana
   image-shape: rectangle
@@ -16,20 +16,35 @@ about:
       href: mailto:parthasaiguttikonda@gmail.com
 ---
 
-## About me
+## About Me 👋
 
-Hello! 👋 I’m **Partha Sai Guttikonda**, a Full-Stack Engineer and Researcher with experience in **machine learning**, **high-performance computing**, and **software development**. 🎓 I hold a Master's degree in **Computer Science** from the University of Texas at Arlington. I’ve worked on **building scalable web applications**, **managing microservices**, and applying **AI** to solve complex problems. 🔧 My projects focus on improving **diagnostic tools**, optimizing **infrastructure**, and automating **workflows**. 🌟 Feel free to explore my work and see how I’ve contributed to **medical imaging**, **cloud computing**, and **backend systems**. I’m excited to collaborate and create impactful solutions! 🌐✨
+Welcome to my portfolio! I am **Partha Sai Guttikonda**, a passionate machine learning enthusiast and software engineer with a strong foundation in developing innovative solutions at the intersection of technology and healthcare. 🎓 I hold a Master’s degree in Computer Engineering from the University of Texas at Arlington, where my research focused on **multimodal algorithms, Vision Language Models (VLMs), and 3D modalities** for medical applications. 💻
+
+Over the course of my academic and professional journey, I have contributed to impactful research projects, including:
+
+- 🧪 Developing a 3D visualization platform for multiplexed immunofluorescence imaging.
+- ⚔️ Conducting adversarial attacks on Vision Language Models for pathology.
+- 🩺 Building a digital pathology viewer integrated with deep learning-based search engines.
+
+These experiences have fueled my passion for creating AI-driven solutions that address real-world challenges in healthcare. 🚀
+
+Currently, I work as a Software Engineer at Southwest Airlines ✈️, where I design and implement efficient, scalable systems leveraging cloud technologies such as AWS Lambda. Previously, I gained hands-on experience as a Full Stack Developer at **Vantashala**, a startup now in production in Texas, where I worked on both frontend (Vue.js) and backend (Java Spring Boot) development. 🔧
+
+This portfolio showcases my journey, projects, and research contributions. 🌟 I am eager to explore opportunities where I can apply my expertise in machine learning and software engineering to create meaningful impact. 🌍
+
+Outside of my professional work, I’m an avid photographer. I love freezing memories and stories through my camera. 📸 Take a look at 👉 [my Unsplash portfolio here](https://unsplash.com/@guttikondaparthasai)!
+
+Feel free to explore my work and get in touch to discuss potential collaborations! 📩
 
 ## Areas of Interest
 
 🧠 Artificial Intelligence and Machine Learning\
-🔬 Medical Imaging and Bioinformatics\
+🖥️ Computer Vision and Image Processing\
 📊 Data Analysis, Reporting, and Visualization\
 🚀 High-Performance Computing (HPC) and GPU Utilization\
 🌐 Cloud Computing and Infrastructure Optimization\
 🔧 Full-Stack Software Development\
 🔄 Automation of Data Pipelines and Workflows\
-🖥️ Computer Vision and Image Processing\
 📚 Continuous Learning and Research in AI\
 
 ## Education
